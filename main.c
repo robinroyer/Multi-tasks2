@@ -53,9 +53,9 @@ void print_prime_factors(uint64_t n)
 			printf("%d\n",i);		
 
 		}
-			printf("%d\n",i);
+			
 		}
-			printf(" sortie de boucle ");
+			
 		
 	}
 	int main(int argc, char *argv[])
