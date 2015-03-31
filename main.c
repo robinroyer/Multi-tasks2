@@ -52,7 +52,7 @@ void print_prime_factors(uint64_t n)
 		
 			printf("%d\n",i);
 			n=n/i;
-			i=2;
+			i=1;
 
 		}
 			
