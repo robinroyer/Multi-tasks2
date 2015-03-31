@@ -42,12 +42,12 @@ void print_prime_factors(uint64_t n)
 {
 	uint64_t i;
 
-	for(i= (uint64_t)2;i<=((int)n);i++)
+	for(i= (uint64_t)2;(is_prime(i)==1);i++)
 	{
 
 
 		
-		if((((int)n)%i==0)&&(is_prime(i)==1))
+		if((((int)n)%i==0))
 		{
 		
 			printf("%d\n",i);
@@ -55,7 +55,7 @@ void print_prime_factors(uint64_t n)
 			i=1;
 
 		}
-			
+				printf("%d\n",n);
 		}
 			
 		
