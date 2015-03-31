@@ -62,5 +62,6 @@ void print_prime_factors(uint64_t n)
 		scanf("%d",&p);
 		retour = is_prime(p);
 		printf("%d\n",retour);
+		print_prime_factors(p);
 		return;
 	}
