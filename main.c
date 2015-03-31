@@ -49,10 +49,13 @@ void print_prime_factors(uint64_t n)
 		
 		if((((int)n)%i==0)&&(is_prime(i)==0))
 		{
+			printf("je suis dans le if");
 			printf("%d\n",i);		
 
 		}
+			printf("%d\n",i);
 		}
+			printf(" sortie de boucle ");
 		
 	}
 	int main(int argc, char *argv[])
