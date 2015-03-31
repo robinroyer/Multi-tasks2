@@ -50,7 +50,9 @@ void print_prime_factors(uint64_t n)
 		if((((int)n)%i==0)&&(is_prime(i)==1))
 		{
 		
-			printf("%d\n",i);		
+			printf("%d\n",i);
+			n=n/i;
+			i=2;
 
 		}
 			
