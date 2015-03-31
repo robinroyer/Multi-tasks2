@@ -41,27 +41,17 @@ int is_prime_last(uint64_t p)
 void print_prime_factors(uint64_t n)
 {
 	uint64_t i;
-	int retour; 
-	
-	do 
-	{
-		
-
-	}while(retour>1);
-
-
-
 
 	for(i= (uint64_t)2;i<((int)n)/2;i++)
 	{
 
 
-		/*
+		
 		if((((int)n)%i==0)&&(is_prime(i)==0))
 		{
 			printf("%d\n",i);		
 
-		}*/
+		}
 		}
 		
 	}
@@ -72,6 +62,5 @@ void print_prime_factors(uint64_t n)
 		scanf("%d",&p);
 		retour = is_prime(p);
 		printf("%d\n",retour);
-		print_prime_factors(p);
 		return;
 	}
