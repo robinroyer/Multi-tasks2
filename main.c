@@ -34,8 +34,6 @@ void print_prime_factors(uint64_t n)
 			n=(uint64_t)((int)n/(int)i);
 			i=(uint64_t)1;
 		}
-		
-
 	}
 	printf("%d\n",n );
 }
