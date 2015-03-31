@@ -42,7 +42,7 @@ void print_prime_factors(uint64_t n)
 {
 	uint64_t i;
 
-	for(i= (uint64_t)2;i<=((int)n)/2;i++)
+	for(i= (uint64_t)2;i<=((int)n);i++)
 	{
 
 
