@@ -11,7 +11,7 @@ int is_prime(uint64_t p)
 
 	uint64_t i;
 	int retour= 1;
-	for(i= (uint64_t)2;i<((int)p)/2;i++)
+	for(i= (uint64_t)2;i<=((int)p)/2;i++)
 	{
 
 		if(((int)p)%i==0)
@@ -42,7 +42,7 @@ void print_prime_factors(uint64_t n)
 {
 	uint64_t i;
 
-	for(i= (uint64_t)2;i<((int)n)/2;i++)
+	for(i= (uint64_t)2;i<=((int)n)/2;i++)
 	{
 
 
