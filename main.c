@@ -25,25 +25,38 @@ int is_prime(uint64_t p)
 
 void print_prime_factors(uint64_t n)
 {
+	printf("%d:",n);
 	uint64_t i;
 	for(i=(uint64_t)2;is_prime(n)==0;i++)
 	{
 		if(((int)n)%i==0)
 		{
-			printf("%d\n",i);
+			printf(" %d",i);
 			n=(uint64_t)((int)n/(int)i);
 			i=(uint64_t)1;
 		}
 	}
-	printf("%d\n",n );
+	printf(" %d\n",n );
 }
+
 int main(int argc, char *argv[])
 {
 	uint64_t p;
 	int retour;
+
+	FILE *fichier = NULL;
+
+	fichier = fopen ("number.txt", "r");
+	while (fscanf(fichier, "%d",&p) != EOF) 
+	{
+		print_prime_factors(p);
+	}
+	fclose(fichier);
+	/*
 	scanf("%d",&p);
 	retour = is_prime(p);
 	print_prime_factors(p);
 		//printf("%d\n",retour);
-	return;
+		*/
+	return 0;
 }
