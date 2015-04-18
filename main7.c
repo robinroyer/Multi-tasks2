@@ -9,7 +9,7 @@
 
 
 
-//TODO: adapter la structure pour enregistrer les diviseurs
+
 
 /**
  * _______________________________structure de données de memoization : arbre binaire___________________________________
@@ -39,7 +39,7 @@ void addNode(node **tree, uint64_t key, uint64_t* dest)
     elem->key = key;
     elem->left = NULL;
     elem->right = NULL;
-    elem->factors = *dest;
+    elem->factors = dest;
 
     if(tmpTree)
     do
