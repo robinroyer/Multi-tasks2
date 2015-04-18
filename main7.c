@@ -43,7 +43,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->right = NULL;
     elem->factors = dest;
     elem->nbFactor = nbFact;
-
+    printf("trace : nouveau noeud créé");
     if(tmpTree)
     do
     {
@@ -61,6 +61,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     }
     while(tmpTree);
     else  *tree = elem;
+    printf("trace : nouveau noeud ajouté");
 }
 
 /**
@@ -82,9 +83,9 @@ int searchNode(node *tree, uint64_t key)
  */
 void printTree(node *tree)
 {
-    printf("coucou");
+    printf("trace : on est dans prinTree");
     if(!tree) return;
-	printf("caca");
+	printf("trace : l'arbre est non vide");
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
