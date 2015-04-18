@@ -266,6 +266,6 @@ int main(int argc, char *argv[])
 	//affihcage de l'arbre binaire ___TEST
 
 	printf(" \n --- affichage de l'arbre --- \n");
-	printTree(Arbre);
+	printTree(Arbre); 
 	return 0;
 }
