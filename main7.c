@@ -19,7 +19,7 @@
  typedef struct node
 {
     // la valeur du nombre à décomposer
-    unsigned int key;
+    uint64_t key;
     // la taleau des diviseurs premiers
     uint64_t factors[MAX_FACTORS];
     // les pointeurs pour la structure
@@ -30,7 +30,7 @@
 /**
  * Ajout d'un noeud correspondant à une valeur de key
  */
-void addNode(node **tree, unsigned int key)
+void addNode(node **tree, uint64_t key, uint64_t* dest)
 {
     node *tmpNode;
     node *tmpTree = *tree;
@@ -39,6 +39,7 @@ void addNode(node **tree, unsigned int key)
     elem->key = key;
     elem->left = NULL;
     elem->right = NULL;
+    elem->factors = dest;
 
     if(tmpTree)
     do
@@ -62,7 +63,7 @@ void addNode(node **tree, unsigned int key)
 /**
  * Recherche dans un arbre à partir d'un noeud, la valeur d'une clef
  */
-int searchNode(node *tree, unsigned int key)
+int searchNode(node *tree, uint64_t key)
 {
     while(tree)
     {
@@ -111,9 +112,10 @@ void clearTree(node **tree)
 
 /** _________________________________________________FIN des fonction de structure de donnée
  * 
- *  -> ajout à l'arbre d'une valeur : addNode(&Arbre, 30);
+ *  -> ajout à l'arbre d'une valeur : addNode(node **tree, unsigned int key, uint64_t* dest)
  *  -> test de présence dans l'arbre: if(searchNode(Arbre, Key)) 
- * 
+ *  -> supprimer un noeud : clearTree(node **tree)
+ *  -> affichage récursif de l'arbre : printTree(node *tree)
  * /
 
 
@@ -147,11 +149,16 @@ int is_prime(uint64_t p)
 /**
  * affiche les facteurs premiers d'un nombre n
  */
-void print_prime_factors(uint64_t n)
+void print_prime_factors(uint64_t n, node *Arbre)
 {
 	uint64_t factors[MAX_FACTORS];
 	int j,k;
 	k=get_prime_factors(n,factors);
+	// si le noeud n'existe pas, on le crée et onstocke le tableau des diviseurs de ce nombre n (key)
+	if(!searchNode(Arbre, n))
+	{
+		addNode(&Arbre, n, factors)	
+	}
 	printf("%ju: ",n);
 	for(j=0; j<k; j++)
 	{
@@ -225,22 +232,30 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 int main(int argc, char *argv[])
 {
 
-	
+	//le premier noeud: la racine de l'arbre
+	node *Arbre = NULL;
+	// un nombre 64 bit pivot pour ranger la ligne lue du fichier
 	uint64_t p;
 	int result=0;
+	//création et ouverture en lecture du fichier
 	FILE *fichier;
 	fichier = fopen ("number.txt", "r");
+	
+	//test de fin de lecture du fichier
 	int finish = 0;
 	while (finish==0) 
 	{
 		if(fscanf(fichier, "%ju",&p) != EOF)
 		{
-			print_prime_factors(p);
+			print_prime_factors(p, Arbre);
+			
 		}
 		else
 		{
 			finish = 1;
 		}
 	}
+	//affihcage de l'arbre binaire ___TEST
+	printTree(Arbre);
 	return 0;
 }
