@@ -1,6 +1,6 @@
-main6 : main6.o
-	gcc -o  main6 main6.c -pthread
-main6.o:main6.c
-	gcc -o main6.o main6.c -pthread
+main7 : main7.o
+	gcc -o  main7 main7.c -pthread
+main7.o:main7.c
+	gcc -o main7.o main7.c -pthread
 clean:
 	rm -rf *.o
