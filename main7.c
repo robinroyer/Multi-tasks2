@@ -18,11 +18,18 @@
  
  typedef struct node
 {
+    // la valeur du nombre à décomposer
     unsigned int key;
+    // la taleau des diviseurs premiers
+    uint64_t factors[MAX_FACTORS];
+    // les pointeurs pour la structure
     struct node *left;
     struct node *right;
 } node ;
 
+/**
+ * Ajout d'un noeud correspondant à une valeur de key
+ */
 void addNode(node **tree, unsigned int key)
 {
     node *tmpNode;
@@ -52,6 +59,9 @@ void addNode(node **tree, unsigned int key)
     else  *tree = elem;
 }
 
+/**
+ * Recherche dans un arbre à partir d'un noeud, la valeur d'une clef
+ */
 int searchNode(node *tree, unsigned int key)
 {
     while(tree)
@@ -63,7 +73,9 @@ int searchNode(node *tree, unsigned int key)
     }
     return 0;
 }
-
+/**
+ * Affiche l'arbre à partir d'un certain noeurd
+ */
 void printTree(node *tree)
 {
     if(!tree) return;
@@ -75,6 +87,9 @@ void printTree(node *tree)
     if(tree->right) printTree(tree->right);
 }
 
+/**
+ * supprime les dezcendant d'un noeuds
+ */
 void clearTree(node **tree)
 {
     node *tmpTree = *tree;
@@ -97,7 +112,7 @@ void clearTree(node **tree)
 /** _________________________________________________FIN des fonction de structure de donnée
  * 
  *  -> ajout à l'arbre d'une valeur : addNode(&Arbre, 30);
- *  ->   test de présence dans l'arbre: if(searchNode(Arbre, Key)) 
+ *  -> test de présence dans l'arbre: if(searchNode(Arbre, Key)) 
  * 
  * /
 
@@ -128,6 +143,10 @@ int is_prime(uint64_t p)
 	}
 	return retour;
 }
+
+/**
+ * affiche les facteurs premiers d'un nombre n
+ */
 void print_prime_factors(uint64_t n)
 {
 	uint64_t factors[MAX_FACTORS];
@@ -141,7 +160,11 @@ void print_prime_factors(uint64_t n)
 	printf("\n");
 }
 
-
+/**
+ * Renvoit un tableau contenant les facteurs premiers du nombre n
+ * L'algorithme effectue des tests qui ne sont effectués que au premier tour ( divisible par 2, 3, 5)
+ * puis les test lors des autres tours sont par itération du pas de 2, 4, 2, 4, 2
+ */
 int get_prime_factors(uint64_t n,uint64_t* dest)
 {
 	
@@ -150,7 +173,8 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 
 	int compteur=0; // le curseur sur le tableau
 	for(i=7;is_prime(n)==0;i+=(pas=6-pas))
-	{
+	{	
+		//les tests au premier tour
 		if(i==7)
 		{
 			if((n)%2==0)
@@ -179,6 +203,7 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 			}
 
 		}
+		// les tests des autres tours
 		if((n)%i==0)
 		{
 			dest[compteur]=i;
@@ -193,6 +218,10 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 	return compteur;
 } 
 
+/**
+ * Le main lit dans un fichier chaque ligne et affiche les facteurs premiers
+ * du nombre lu sur chaque ligne en utilisant le multi-threading
+ */
 int main(int argc, char *argv[])
 {
 
