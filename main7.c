@@ -21,7 +21,7 @@
     // la valeur du nombre à décomposer
     uint64_t key;
     // la taleau des diviseurs premiers
-    uint64_t factors[MAX_FACTORS];
+    uint64_t *factors[MAX_FACTORS];
     // les pointeurs pour la structure
     struct node *left;
     struct node *right;
