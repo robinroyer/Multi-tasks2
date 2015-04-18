@@ -6,7 +6,7 @@
 
 
 
-//TODO: adapter la structure pour enregistrer les diviseurs
+//TODO: adapter pointeur reférence etc..
 
 /**
  * _______________________________structure de données de memoization : arbre binaire___________________________________
