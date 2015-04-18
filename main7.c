@@ -22,6 +22,8 @@
     uint64_t key;
     // la taleau des diviseurs premiers
     uint64_t *factors;
+    // le nombre de facteurs dans le tableau
+    int nbFactor;
     // les pointeurs pour la structure
     struct node *left;
     struct node *right;
@@ -30,7 +32,7 @@
 /**
  * Ajout d'un noeud correspondant à une valeur de key
  */
-void addNode(node **tree, uint64_t key, uint64_t dest[])
+void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
 {
     node *tmpNode;
     node *tmpTree = *tree;
@@ -40,6 +42,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[])
     elem->left = NULL;
     elem->right = NULL;
     elem->factors = dest;
+    elem->nbFactor = nbFact;
 
     if(tmpTree)
     do
@@ -84,6 +87,12 @@ void printTree(node *tree)
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
+    int j;
+    for(j=0; j<tree->nbFactor; j++)
+	{
+		printf("%lu ",tree->factors[j]);
+	}
+	printf("\n");
 
     if(tree->right) printTree(tree->right);
 }
@@ -153,7 +162,7 @@ void print_prime_factors(uint64_t n, node *Arbre)
 	// si le noeud n'existe pas, on le crée et onstocke le tableau des diviseurs de ce nombre n (key)
 	if(!searchNode(Arbre, n))
 	{
-		addNode(&Arbre, n, factors);	
+		addNode(&Arbre, n, factors, k);	
 	}
 	printf("%ju: ",n);
 	for(j=0; j<k; j++)
@@ -252,6 +261,8 @@ int main(int argc, char *argv[])
 		}
 	}
 	//affihcage de l'arbre binaire ___TEST
+
+	printf("       \n  affichage de l'arbre \n");
 	printTree(Arbre);
 	return 0;
 }
