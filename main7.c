@@ -82,8 +82,9 @@ int searchNode(node *tree, uint64_t key)
  */
 void printTree(node *tree)
 {
+    printf("coucou");
     if(!tree) return;
-
+	printf("caca");
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
