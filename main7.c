@@ -157,7 +157,7 @@ void print_prime_factors(uint64_t n, node *Arbre)
 	// si le noeud n'existe pas, on le crée et onstocke le tableau des diviseurs de ce nombre n (key)
 	if(!searchNode(Arbre, n))
 	{
-		addNode(&Arbre, n, factors);	
+		addNode(&Arbre, n, &factors);	
 	}
 	printf("%ju: ",n);
 	for(j=0; j<k; j++)
