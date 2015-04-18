@@ -21,7 +21,7 @@
     // la valeur du nombre à décomposer
     uint64_t key;
     // la taleau des diviseurs premiers
-    uint64_t *factors[MAX_FACTORS];
+    uint64_t factors[MAX_FACTORS];
     // les pointeurs pour la structure
     struct node *left;
     struct node *right;
@@ -30,7 +30,7 @@
 /**
  * Ajout d'un noeud correspondant à une valeur de key
  */
-void addNode(node **tree, uint64_t key, uint64_t* dest)
+void addNode(node **tree, uint64_t key, uint64_t dest[])
 {
     node *tmpNode;
     node *tmpTree = *tree;
@@ -39,7 +39,7 @@ void addNode(node **tree, uint64_t key, uint64_t* dest)
     elem->key = key;
     elem->left = NULL;
     elem->right = NULL;
-    elem->(*factors) = dest;
+    elem->factors = &dest;
 
     if(tmpTree)
     do
@@ -131,19 +131,14 @@ retourne 1 si p est premier
 */
 int is_prime(uint64_t p)
 {
-
-	uint64_t i;
-	int retour= 1;
-	for(i= 2;i<(p/2)&&retour==1;i++)
+	for(uint64_t i= 2;i<(p/2);i++)
 	{
-
-		if((p)%i==0)
+		if(!(p%i))
 		{
-			retour = 0;
-
+			return 0;
 		}
 	}
-	return retour;
+	return 1;
 }
 
 /**
