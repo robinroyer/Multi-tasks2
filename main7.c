@@ -43,7 +43,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->right = NULL;
     elem->factors = dest;
     elem->nbFactor = nbFact;
-    printf("trace : nouveau noeud créé");
+    printf("trace : nouveau noeud créé \n");
     if(tmpTree)
     do
     {
@@ -61,7 +61,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     }
     while(tmpTree);
     else  *tree = elem;
-    printf("trace : nouveau noeud ajouté");
+    printf("trace : nouveau noeud ajouté \n");
 }
 
 /**
@@ -69,6 +69,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
  */
 int searchNode(node *tree, uint64_t key)
 {
+	printf("trace : nouvelle recherche dans l'arbre \n");
     while(tree)
     {
         if(key == tree->key) return 1;
@@ -83,9 +84,9 @@ int searchNode(node *tree, uint64_t key)
  */
 void printTree(node *tree)
 {
-    printf("trace : on est dans prinTree");
+    printf("trace : on est dans prinTree \n");
     if(!tree) return;
-	printf("trace : l'arbre est non vide");
+	printf("trace : l'arbre est non vide \n");
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
@@ -264,7 +265,7 @@ int main(int argc, char *argv[])
 	}
 	//affihcage de l'arbre binaire ___TEST
 
-	printf("       \n  affichage de l'arbre \n");
+	printf(" \n --- affichage de l'arbre --- \n");
 	printTree(Arbre);
 	return 0;
 }
