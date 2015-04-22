@@ -111,8 +111,8 @@ void printNode(node *tree)
 {
     
     if(!tree) return;
-    printf("Cle = %d\n", tree->key);
-    printf("nombre de facteurs = %d\n", tree->nbFactor);
+    printf("%d :", tree->key);
+    //printf("nombre de facteurs = %d\n", tree->nbFactor);
     int j;
     for(j=0; j<tree->nbFactor; j++)
 	{
