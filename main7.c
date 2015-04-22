@@ -86,7 +86,7 @@ void printTree(node *tree)
 {
     printf("trace : on est dans prinTree \n");
     if(!tree) return;
-	printf("trace : l'arbre est non vide \n");
+//	printf("trace : l'arbre est non vide \n");
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
