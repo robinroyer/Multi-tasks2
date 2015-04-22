@@ -21,7 +21,7 @@
     // la valeur du nombre à décomposer
     uint64_t key;
     // la taleau des diviseurs premiers
-    uint64_t *factors;
+    uint64_t factors[MAX_FACTORS];
     // le nombre de facteurs dans le tableau
     int nbFactor;
     // les pointeurs pour la structure
@@ -43,10 +43,11 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->right = NULL;
     elem->nbFactor = nbFact;
  
-   
-    elem->factors = dest;
-    
-     printf("nombre de facteur = %d\n", elem->nbFactor);
+   for(i=0;i<nbFact;i++)
+   {
+	elem->factors[i] = dest[i];
+   }
+    printf("nombre de facteur = %d\n", elem->nbFactor);
     printf("trace : nouveau noeud créé \n");
     if(tmpTree)
     do
