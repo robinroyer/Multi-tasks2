@@ -89,7 +89,7 @@ int searchNode(node *tree, uint64_t key)
  */
 void printTree(node *tree)
 {
-    printf(" \n");
+    
     if(!tree) return;
 //	printf("trace : l'arbre est non vide \n");
     if(tree->left)  printTree(tree->left);
@@ -104,6 +104,7 @@ void printTree(node *tree)
 	printf("\n");
 
     if(tree->right) printTree(tree->right);
+    printf(" \n");
 }
 
 /**
@@ -253,7 +254,7 @@ int main(int argc, char *argv[])
 	int result=0;
 	//création et ouverture en lecture du fichier
 	FILE *fichier;
-	fichier = fopen ("number.txt", "r");
+	fichier = fopen ("number2.txt", "r");
 	
 	//test de fin de lecture du fichier
 	int finish = 0;
