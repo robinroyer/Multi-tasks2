@@ -42,7 +42,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->left = NULL;
     elem->right = NULL;
     elem->nbFactor = nbFact;
- 
+    int i;
    for(i=0;i<nbFact;i++)
    {
 	elem->factors[i] = dest[i];
