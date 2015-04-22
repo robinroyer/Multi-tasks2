@@ -41,8 +41,15 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->key = key;
     elem->left = NULL;
     elem->right = NULL;
-    elem->factors = dest;
     elem->nbFactor = nbFact;
+    uint64_t tab[nbFact];
+    int i;
+    for(i=0; i<nbFact;i++)
+    {
+    	tab[i]=dest[i];
+    }
+    elem->factors = &tab;
+    
      printf("nombre de facteur = %d\n", elem->nbFactor);
     printf("trace : nouveau noeud créé \n");
     if(tmpTree)
@@ -232,7 +239,6 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 	}
 	dest[compteur]=n;
 	compteur++;
-	printf("nbfactor = %d\n", compteur);
 	return compteur;
 } 
 
