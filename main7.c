@@ -72,17 +72,17 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
 /**
  * Recherche dans un arbre à partir d'un noeud, la valeur d'une clef
  */
-int searchNode(node *tree, uint64_t key)
+node* searchNode(node *tree, uint64_t key)
 {
 	printf("trace : nouvelle recherche dans l'arbre \n");
     while(tree)
     {
-        if(key == tree->key) return 1;
+        if(key == tree->key) return tree;
 
         if(key > tree->key ) tree = tree->right;
         else tree = tree->left;
     }
-    return 0;
+    return NULL;
 }
 /**
  * Affiche l'arbre à partir d'un certain noeurd
@@ -105,6 +105,20 @@ void printTree(node *tree)
 
     if(tree->right) printTree(tree->right);
     printf(" \n");
+}
+
+void printNode(node *tree)
+{
+    
+    if(!tree) return;
+    printf("Cle = %d\n", tree->key);
+    printf("nombre de facteurs = %d\n", tree->nbFactor);
+    int j;
+    for(j=0; j<tree->nbFactor; j++)
+	{
+		printf("%lu ",tree->factors[j]);
+	}
+	printf("\n");
 }
 
 /**
@@ -168,11 +182,18 @@ void print_prime_factors(uint64_t n, node **Arbre)
 {
 	uint64_t factors[MAX_FACTORS];
 	int j,k;
-	k=get_prime_factors(n,factors);
-	// si le noeud n'existe pas, on le crée et onstocke le tableau des diviseurs de ce nombre n (key)
-	if(!searchNode(*Arbre, n))
+	
+	
+	node* cur=searchNode(*Arbre, n);
+	// si le noeud n'existe pas, on le calcule le crée et onstocke le tableau des diviseurs de ce nombre n (key) sinon on l'affiche
+	if(cur->key==n)
+	{	
+		printNode(cur);
+	}
+	else
 	{
-		addNode(Arbre, n, factors, k);	
+		k=get_prime_factors(n,factors);
+		addNode(Arbre, n, factors, k);
 	}
 	printf("%ju: ",n);
 	for(j=0; j<k; j++)
@@ -254,7 +275,7 @@ int main(int argc, char *argv[])
 	int result=0;
 	//création et ouverture en lecture du fichier
 	FILE *fichier;
-	fichier = fopen ("number2.txt", "r");
+	fichier = fopen ("number.txt", "r");
 	
 	//test de fin de lecture du fichier
 	int finish = 0;
