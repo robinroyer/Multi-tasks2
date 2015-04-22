@@ -42,13 +42,9 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
     elem->left = NULL;
     elem->right = NULL;
     elem->nbFactor = nbFact;
-    uint64_t tab[nbFact];
-    int i;
-    for(i=0; i<nbFact;i++)
-    {
-    	tab[i]=dest[i];
-    }
-    elem->factors = tab;
+ 
+   
+    elem->factors = dest;
     
      printf("nombre de facteur = %d\n", elem->nbFactor);
     printf("trace : nouveau noeud créé \n");
