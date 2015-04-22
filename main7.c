@@ -157,7 +157,7 @@ int is_prime(uint64_t p)
 /**
  * affiche les facteurs premiers d'un nombre n
  */
-void print_prime_factors(uint64_t n, node *Arbre)
+void print_prime_factors(uint64_t n, node **Arbre)
 {
 	uint64_t factors[MAX_FACTORS];
 	int j,k;
@@ -180,7 +180,7 @@ void print_prime_factors(uint64_t n, node *Arbre)
  * L'algorithme effectue des tests qui ne sont effectués que au premier tour ( divisible par 2, 3, 5)
  * puis les test lors des autres tours sont par itération du pas de 2, 4, 2, 4, 2
  */
-int get_prime_factors(uint64_t n,uint64_t** dest)
+int get_prime_factors(uint64_t n,uint64_t* dest)
 {
 	
 	uint64_t i;
