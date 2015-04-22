@@ -195,13 +195,14 @@ void print_prime_factors(uint64_t n, node **Arbre)
 		k=get_prime_factors(n,factors);
 		addNode(Arbre, n, factors, k);
 	
-	printf("%ju: ",n);
-	for(j=0; j<k; j++)
-	{
-		printf("%lu ",factors[j]);
-	}
-	}
+		printf("%ju: ",n);
+		for(j=0; j<k; j++)
+		{
+			printf("%lu ",factors[j]);
+		}
 	printf("\n");
+	}
+	
 }
 
 /**
