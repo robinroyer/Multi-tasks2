@@ -186,11 +186,11 @@ void print_prime_factors(uint64_t n, node **Arbre)
 	
 	node* cur=searchNode(*Arbre, n);
 	// si le noeud n'existe pas, on le calcule le crée et onstocke le tableau des diviseurs de ce nombre n (key) sinon on l'affiche
-/**	if(cur->key==n)
+	if(cur->key==n)
 	{	
-		printNode(cur);
+	//	printNode(cur);
 	}
-	else **/
+	else 
 	{
 		k=get_prime_factors(n,factors);
 		addNode(Arbre, n, factors, k);
