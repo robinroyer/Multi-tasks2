@@ -90,6 +90,7 @@ void printTree(node *tree)
     if(tree->left)  printTree(tree->left);
 
     printf("Cle = %d\n", tree->key);
+     printf("nombre de facteurs = %d\n", tree->nbFactor);
     int j;
     for(j=0; j<tree->nbFactor; j++)
 	{
@@ -101,7 +102,7 @@ void printTree(node *tree)
 }
 
 /**
- * supprime les dezcendant d'un noeuds
+ * supprime les descendant d'un noeuds
  */
 void clearTree(node **tree)
 {
