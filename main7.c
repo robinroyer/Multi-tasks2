@@ -122,7 +122,7 @@ void clearTree(node **tree)
 
 
 
-/** _________________________________________________FIN des fonction de structure de donnée
+/** _________________________________________________FIN des fonction de structure de données
  * 
  *  -> ajout à l'arbre d'une valeur : addNode(node **tree, unsigned int key, uint64_t* dest)
  *  -> test de présence dans l'arbre: if(searchNode(Arbre, Key)) 
@@ -180,7 +180,7 @@ void print_prime_factors(uint64_t n, node *Arbre)
  * L'algorithme effectue des tests qui ne sont effectués que au premier tour ( divisible par 2, 3, 5)
  * puis les test lors des autres tours sont par itération du pas de 2, 4, 2, 4, 2
  */
-int get_prime_factors(uint64_t n,uint64_t* dest)
+int get_prime_factors(uint64_t n,uint64_t** dest)
 {
 	
 	uint64_t i;
@@ -255,7 +255,7 @@ int main(int argc, char *argv[])
 	{
 		if(fscanf(fichier, "%ju",&p) != EOF)
 		{
-			print_prime_factors(p, Arbre);
+			print_prime_factors(p, &Arbre);
 			
 		}
 		else
