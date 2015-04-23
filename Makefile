@@ -2,7 +2,8 @@ default: help
 
 help:
 	@echo Useful targets:
-	@echo "  small.txt medium.txt large.txt many.txt:  generate some input files "
+	@echo "  number2:  generate an imput files "
+	@echo "  generator: compile the generator"
 	@echo "  ResolutionAvecStockage ResolutionSansStockage: compile your programs"
 	@echo "  run1 run2:  run your programs through the 'time' utility"
 	@echo "  clean:  delete all generated files"
@@ -10,23 +11,14 @@ help:
 #########################
 # workload generation
 
-tiny.txt:
-	./generator.cs 20 20 0 > $@
-
-small.txt:
-	./generator.cs 20 32 50 > $@
-
-medium.txt:
-	./generator.cs 20 50 50 > $@
-
-large.txt:
-	./generator.cs 20 64 50 > $@
-
-many.txt:
-	./generator.cs 1000 50 75 > $@
+number2.txt:
+	./generator > $@
 
 #########################
 ## program compilation
+
+generator: generator.c
+	gcc -o generator generator.c
 
 resolutionSansStockage: main6.c
 	gcc  -pthread -o resolutionSansStockage main6.c 
