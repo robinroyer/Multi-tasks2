@@ -29,10 +29,10 @@ many.txt:
 ## program compilation
 
 resolutionSansStockage: main6.c
-	gcc -Wall -pthread -o resolutionSansStockage main6.c 
+	gcc  -pthread -o resolutionSansStockage main6.c 
 
 ResolutionAvecStockage: main7.c
-	gcc -Wall -pthread -o resolutionSansStockage main7.c 
+	gcc  -pthread -o resolutionSansStockage main7.c 
 
 # add your own rules when you create new programs
 
