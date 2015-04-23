@@ -192,7 +192,7 @@ void print_prime_factors(uint64_t n, node **Arbre)
 	}
 	else 
 	{
-		k=get_prime_factors(n,factors);
+		k=get_prime_factors(Arbre,n,factors);
 		addNode(Arbre, n, factors, k);
 	
 		printf("%ju: ",n);
@@ -210,7 +210,7 @@ void print_prime_factors(uint64_t n, node **Arbre)
  * L'algorithme effectue des tests qui ne sont effectués que au premier tour ( divisible par 2, 3, 5)
  * puis les test lors des autres tours sont par itération du pas de 2, 4, 2, 4, 2
  */
-int get_prime_factors(uint64_t n,uint64_t* dest)
+int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
 {
 	
 	uint64_t i;
@@ -222,6 +222,17 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 		//les tests au premier tour
 		if(i==7)
 		{
+			node* cur=searchNode(*Arbre, n);
+			if(cur != NULL)
+			{
+				int z
+				for (z=0;z<cur->nbFactor-1;z++){
+					dest[compteur]=cur->factors[i];
+					compteur++;
+				}
+				n = factors[compteur+1];
+				
+			}
 			if((n)%2==0)
 			{
 				dest[compteur]=2;
