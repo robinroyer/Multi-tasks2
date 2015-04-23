@@ -222,15 +222,15 @@ int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
 		//les tests au premier tour
 		if(i==7)
 		{
-			node* cur=searchNode(*Arbre, n);
+			node* cur=searchNode(*tree, n);
 			if(cur != NULL)
 			{
-				int z
+				int z;
 				for (z=0;z<cur->nbFactor-1;z++){
 					dest[compteur]=cur->factors[i];
 					compteur++;
 				}
-				n = factors[compteur+1];
+				n = cur->factors[compteur+1];
 				
 			}
 			if((n)%2==0)
