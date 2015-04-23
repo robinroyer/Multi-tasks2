@@ -32,7 +32,7 @@ resolutionSansStockage: main6.c
 	gcc  -pthread -o resolutionSansStockage main6.c 
 
 resolutionAvecStockage: main7.c
-	gcc  -pthread -o resolutionSansStockage main7.c 
+	gcc  -pthread -o resolutionAvecStockage main7.c 
 
 # add your own rules when you create new programs
 
