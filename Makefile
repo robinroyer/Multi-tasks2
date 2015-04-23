@@ -31,7 +31,7 @@ many.txt:
 resolutionSansStockage: main6.c
 	gcc  -pthread -o resolutionSansStockage main6.c 
 
-ResolutionAvecStockage: main7.c
+resolutionAvecStockage: main7.c
 	gcc  -pthread -o resolutionSansStockage main7.c 
 
 # add your own rules when you create new programs
@@ -43,7 +43,7 @@ run1: resolutionSansStockage
 	time ./resolutionSansStockage
 
 run2: ResolutionAvecStockage
-	time ./ResolutionAvecStockage
+	time ./resolutionAvecStockage
 
 #########################
 ## utilities
