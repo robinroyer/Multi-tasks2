@@ -297,7 +297,7 @@ int main(int argc, char *argv[])
 		fichier = fopen ("primes.txt", "r");
 	
 	//test de fin de lecture du fichier
-	int finish = 0;
+	finish = 0;
 	while (finish==0) 
 	{
 		if(fscanf(fichier, "%ju",&p) != EOF)
