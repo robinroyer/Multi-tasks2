@@ -47,7 +47,7 @@ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
    {
 	elem->factors[i] = dest[i];
    }
-    printf("key = %ju\n", elem->key);
+    //printf("key = %ju\n", elem->key);
     //printf("trace : nouveau noeud créé \n");
     if(tmpTree)
     do
@@ -94,7 +94,7 @@ void printTree(node *tree)
 //	printf("trace : l'arbre est non vide \n");
     if(tree->left)  printTree(tree->left);
 
-    printf("Cle = %d\n", tree->key);
+    printf("Cle = %ju\n", tree->key);
      printf("nombre de facteurs = %d\n", tree->nbFactor);
     int j;
     for(j=0; j<tree->nbFactor; j++)
@@ -111,7 +111,7 @@ void printNode(node *tree)
 {
     
     if(!tree) return;
-    printf("%d :", tree->key);
+    printf("%ju :", tree->key);
     //printf("nombre de facteurs = %d\n", tree->nbFactor);
     int j;
     for(j=0; j<tree->nbFactor; j++)
