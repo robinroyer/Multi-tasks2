@@ -20,26 +20,26 @@ number2.txt:
 generator: generator.c
 	gcc -o generator generator.c
 
-resolutionSansStockage: main6.c
-	gcc  -pthread -o resolutionSansStockage main6.c 
+solution1: main6.c
+	gcc  -pthread -o solution1 main6.c 
 
-resolutionAvecStockage: main7.c
-	gcc  -pthread -o resolutionAvecStockage main7.c 
+solution2: main7.c
+	gcc  -pthread -o solution2 main7.c 
 
 # add your own rules when you create new programs
 
 #########################
 ## program execution
 
-run1: resolutionSansStockage
-	time ./resolutionSansStockage
+run1: solution1
+	time ./solution1
 
-run2: resolutionAvecStockage
-	time ./resolutionAvecStockage
+run2: solution2
+	time ./solution2
 
 #########################
 ## utilities
 
 clean:
-	rm -f resolutionSansStockage resolutionAvecStockage tiny.txt small.txt medium.txt large.txt many.txt 
+	rm -f solution2 solution1 number2.txt
 
