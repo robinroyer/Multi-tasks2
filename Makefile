@@ -42,12 +42,12 @@ resolutionAvecStockage: main7.c
 run1: resolutionSansStockage
 	time ./resolutionSansStockage
 
-run2: ResolutionAvecStockage
+run2: resolutionAvecStockage
 	time ./resolutionAvecStockage
 
 #########################
 ## utilities
 
 clean:
-	rm -f resolutionSansStockage ResolutionAvecStockage tiny.txt small.txt medium.txt large.txt many.txt 
+	rm -f resolutionSansStockage resolutionAvecStockage tiny.txt small.txt medium.txt large.txt many.txt 
 
