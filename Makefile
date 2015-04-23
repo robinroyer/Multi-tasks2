@@ -2,9 +2,10 @@ default: help
 
 help:
 	@echo Useful targets:
-	@echo "  number2:  generate an imput files "
-	@echo "  generator: compile the generator"
-	@echo "  ResolutionAvecStockage ResolutionSansStockage: compile your programs"
+	@echo "  number2:  generate an imput files: number2.txt "
+	@echo "  generator: compile the generator.c"
+	@echo "  solution1: compile your programs without Memoization"
+	@echo "  solution2: compile your programs without Memoization"
 	@echo "  run1 run2:  run your programs through the 'time' utility"
 	@echo "  clean:  delete all generated files"
 
