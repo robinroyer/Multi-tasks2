@@ -277,7 +277,24 @@ int main(int argc, char *argv[])
 	int result=0;
 	//création et ouverture en lecture du fichier
 	FILE *fichier;
-	fichier = fopen ("number.txt", "r");
+	fichier = fopen ("tricky.txt", "r");
+	
+	//test de fin de lecture du fichier
+	int finish = 0;
+	while (finish==0) 
+	{
+		if(fscanf(fichier, "%ju",&p) != EOF)
+		{
+			print_prime_factors(p, &Arbre);
+			
+		}
+		else
+		{
+			finish = 1;
+		}
+	}
+	
+		fichier = fopen ("primes.txt", "r");
 	
 	//test de fin de lecture du fichier
 	int finish = 0;
