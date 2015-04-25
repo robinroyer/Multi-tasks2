@@ -165,7 +165,7 @@ retourne 1 si p est premier
 int is_prime(uint64_t p)
 {
 	uint64_t i;
-	for(i= 2;i<(p/2)&&retour==1;i++)
+	for(i= 2;i<(p/2);i++)
 	{
 		if(!(p%i))
 		{
