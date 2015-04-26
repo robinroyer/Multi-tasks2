@@ -7,7 +7,8 @@
 
 #define MAX_FACTORS 64
 
-
+static pthread_mutex_t mtxCpt;
+static pthread_mutex_t affichage;
 
 
 
@@ -194,13 +195,14 @@ void print_prime_factors(uint64_t n, node **Arbre)
 	{
 		k=get_prime_factors(Arbre,n,factors);
 		addNode(Arbre, n, factors, k);
-	
+		pthread_mutex_lock(&affichage);
 		printf("%ju: ",n);
 		for(j=0; j<k; j++)
 		{
 			printf("%lu ",factors[j]);
 		}
-	printf("\n");
+		printf("\n");
+		pthread_mutex_unlock(&affichage);
 	}
 	
 }
@@ -273,6 +275,34 @@ int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
 	compteur++;
 	return compteur;
 } 
+/**
+ * Permet de lancer une procedure qui créé des ptreads 
+ * qui vont eux même lancer la décomposition en nombre entier. 
+ */
+void *procedure_ptread(void *file)
+{
+	//le premier noeud: la racine de l'arbre
+	node *Arbre = NULL;
+
+	uint64_t p;
+	FILE *fichier = (FILE*)file;
+	int finish = 0;
+	//test de fin de lecture du fichier
+	while (finish==0) 
+	{
+		pthread_mutex_lock(&mtxCpt);
+		if(fscanf(fichier, "%lu",&p) != EOF)
+		{
+			pthread_mutex_unlock(&mtxCpt);
+			print_prime_factors(p, &Arbre);
+		}
+		else
+		{
+			pthread_mutex_unlock(&mtxCpt);
+			finish = 1;
+		}
+	}
+}
 
 /**
  * Le main lit dans un fichier chaque ligne et affiche les facteurs premiers
@@ -281,23 +311,45 @@ int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
 int main(int argc, char *argv[])
 {
 
-	//le premier noeud: la racine de l'arbre
-	node *Arbre = NULL;
+
 	// un nombre 64 bit pivot pour ranger la ligne lue du fichier
 	uint64_t p;
 	int result=0;
 	//création et ouverture en lecture du fichier
 	FILE *fichier;
 	fichier = fopen ("number.txt", "r");
-	
-	//test de fin de lecture du fichier
-	int finish = 0;
-	while (fscanf(fichier, "%ju",&p) != EOF)
+
+	//création mutex
+	pthread_t tid1,tid2;
+	//initialisation mutex
+	pthread_mutex_init(&mtxCpt,NULL);
+	pthread_mutex_init(&affichage,NULL);
+	//creation
+	if(pthread_create(&tid1, NULL, procedure_ptread, (void *) fichier)!=0)
 	{
-		print_prime_factors(p, &Arbre);		
+		printf("Erreur de création de thread\n");
 	}
-		
-	//affihcage de l'arbre binaire ___TEST
+	if(pthread_create(&tid2, NULL, procedure_ptread, (void *) fichier)!=0)
+	{
+		printf("Erreur de création de thread\n");
+	}
+
+	//attente
+	if(pthread_join(tid1,NULL)!=0)
+	{
+		printf("Erreur de joins de thread 1\n");
+	}
+	if(pthread_join(tid2,NULL)!=0)
+	{
+		printf("Erreur de joins de thread 2\n");
+	}
+
+	fclose(fichier);
+	pthread_mutex_destroy(&affichage);
+	pthread_mutex_destroy(&mtxCpt);
+	pthread_exit(NULL);
+	
+	//affichage de l'arbre binaire ___TEST
 
 	//printf(" \n --- affichage de l'arbre --- \n");
 	//printTree(Arbre); 
