@@ -292,20 +292,11 @@ int main(int argc, char *argv[])
 	
 	//test de fin de lecture du fichier
 	int finish = 0;
-	while (finish==0) 
+	while (fscanf(fichier, "%ju",&p) != EOF)
 	{
-		if(fscanf(fichier, "%ju",&p) != EOF)
-		{
-			print_prime_factors(p, &Arbre);
-			
-		}
-		else
-		{
-			finish = 1;
-		}
+		print_prime_factors(p, &Arbre);		
 	}
-	
-	
+		
 	//affihcage de l'arbre binaire ___TEST
 
 	//printf(" \n --- affichage de l'arbre --- \n");
