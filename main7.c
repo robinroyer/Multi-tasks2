@@ -85,7 +85,7 @@ node* searchNode(node *tree, uint64_t key)
     return NULL;
 }
 /**
- * Affiche l'arbre à partir d'un certain noeurd
+ * Affiche l'arbre à partir d'un certain noeud
  */
 void printTree(node *tree)
 {
@@ -185,7 +185,7 @@ void print_prime_factors(uint64_t n, node **Arbre)
 	
 	
 	node* cur=searchNode(*Arbre, n);
-	// si le noeud n'existe pas, on le calcule le crée et onstocke le tableau des diviseurs de ce nombre n (key) sinon on l'affiche
+	// si le noeud n'existe pas, on le calcule le crée et on stocke le tableau des diviseurs de ce nombre n (key) sinon on l'affiche
 	if(cur!=NULL)
 	{	
 		printNode(cur);
