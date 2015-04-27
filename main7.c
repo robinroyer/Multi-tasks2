@@ -214,7 +214,7 @@ int is_prime(uint64_t p)
  {
  	
  	uint64_t i;
- 	uint64_t pas=4;
+ 	uint64_t pas=2;
 
 	int compteur=0; // le curseur sur le tableau
 	for(i=7;i*i<= n;i+=(pas=6-pas))
@@ -241,7 +241,7 @@ int is_prime(uint64_t p)
 				i=5;
 				pas=4;
 			}
-			if((n)%3==0)
+			else if((n)%3==0)
 			{
 				dest[compteur]=3;
 				compteur++;
@@ -249,7 +249,7 @@ int is_prime(uint64_t p)
 				i=5;
 				pas=4;
 			}
-			if((n)%5==0)
+			else if((n)%5==0)
 			{
 				dest[compteur]=5;
 				compteur++;
@@ -273,6 +273,7 @@ int is_prime(uint64_t p)
 	compteur++;
 	return compteur;
 } 
+
 /**
  * Permet de lancer une procedure qui créé des ptreads 
  * qui vont eux même lancer la décomposition en nombre entier. 
@@ -318,7 +319,7 @@ int is_prime(uint64_t p)
  	fichier = fopen ("number.txt", "r");
 
 	//création mutex
- 	pthread_t tid1,tid2;
+ 	pthread_t tid1,tid2,tid3,tid4,tid5,tid6;
 	//initialisation mutex
  	pthread_mutex_init(&mtxCpt,NULL);
  	pthread_mutex_init(&affichage,NULL);
@@ -328,6 +329,22 @@ int is_prime(uint64_t p)
  		printf("Erreur de création de thread\n");
  	}
  	if(pthread_create(&tid2, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
+ 	if(pthread_create(&tid3, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
+ 	if(pthread_create(&tid4, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
+ 	if(pthread_create(&tid5, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
+ 	if(pthread_create(&tid6, NULL, procedure_ptread, (void *) fichier)!=0)
  	{
  		printf("Erreur de création de thread\n");
  	}
@@ -341,12 +358,29 @@ int is_prime(uint64_t p)
  	{
  		printf("Erreur de joins de thread 2\n");
  	}
+ 	if(pthread_join(tid3,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 3\n");
+ 	}
+ 	if(pthread_join(tid4,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 4\n");
+ 	}
+ 	if(pthread_join(tid5,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 3\n");
+ 	}
+ 	if(pthread_join(tid6,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 4\n");
+ 	}
+
 
  	fclose(fichier);
  	pthread_mutex_destroy(&affichage);
  	pthread_mutex_destroy(&mtxCpt);
  	pthread_exit(NULL);
- 	
+
 	//affichage de l'arbre binaire ___TEST
 
 	//printf(" \n --- affichage de l'arbre --- \n");
