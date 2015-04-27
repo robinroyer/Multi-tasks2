@@ -5,6 +5,8 @@
 #include <pthread.h>
 #include <unistd.h>
 
+
+
 #define MAX_FACTORS 64
 
 static pthread_mutex_t mtxCpt;
@@ -18,127 +20,127 @@ static pthread_mutex_t affichage;
  
  
  typedef struct node
-{
+ {
     // la valeur du nombre à décomposer
-    uint64_t key;
+ 	uint64_t key;
     // la taleau des diviseurs premiers
-    uint64_t factors[MAX_FACTORS];
+ 	uint64_t factors[MAX_FACTORS];
     // le nombre de facteurs dans le tableau
-    int nbFactor;
+ 	int nbFactor;
     // les pointeurs pour la structure
-    struct node *left;
-    struct node *right;
-} node ;
+ 	struct node *left;
+ 	struct node *right;
+ } node ;
 
 /**
  * Ajout d'un noeud correspondant à une valeur de key
  */
-void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
-{
-    node *tmpNode;
-    node *tmpTree = *tree;
+ void addNode(node **tree, uint64_t key, uint64_t dest[], int nbFact)
+ {
+ 	node *tmpNode;
+ 	node *tmpTree = *tree;
 
-    node *elem = malloc(sizeof(node));
-    elem->key = key;
-    elem->left = NULL;
-    elem->right = NULL;
-    elem->nbFactor = nbFact;
-    int i;
-   for(i=0;i<nbFact;i++)
-   {
-	elem->factors[i] = dest[i];
-   }
+ 	node *elem = malloc(sizeof(node));
+ 	elem->key = key;
+ 	elem->left = NULL;
+ 	elem->right = NULL;
+ 	elem->nbFactor = nbFact;
+ 	int i;
+ 	for(i=0;i<nbFact;i++)
+ 	{
+ 		elem->factors[i] = dest[i];
+ 	}
     //printf("key = %ju\n", elem->key);
     //printf("trace : nouveau noeud créé \n");
-    if(tmpTree)
-    do
-    {
-        tmpNode = tmpTree;
-        if(key > tmpTree->key )
-        {
-            tmpTree = tmpTree->right;
-            if(!tmpTree) tmpNode->right = elem;
-        }
-        else
-        {
-            tmpTree = tmpTree->left;
-            if(!tmpTree) tmpNode->left = elem;
-        }
-    }
-    while(tmpTree);
-    else  *tree = elem;
+ 	if(tmpTree)
+ 		do
+ 	{
+ 		tmpNode = tmpTree;
+ 		if(key > tmpTree->key )
+ 		{
+ 			tmpTree = tmpTree->right;
+ 			if(!tmpTree) tmpNode->right = elem;
+ 		}
+ 		else
+ 		{
+ 			tmpTree = tmpTree->left;
+ 			if(!tmpTree) tmpNode->left = elem;
+ 		}
+ 	}
+ 	while(tmpTree);
+ 	else  *tree = elem;
     //printf("trace : nouveau noeud ajouté \n");
-}
+ }
 
 /**
  * Recherche dans un arbre à partir d'un noeud, la valeur d'une clef
  */
-node* searchNode(node *tree, uint64_t key)
-{
+ node* searchNode(node *tree, uint64_t key)
+ {
 	//printf("trace : nouvelle recherche dans l'arbre \n");
-    while(tree)
-    {
-        if(key == tree->key) return tree;
+ 	while(tree)
+ 	{
+ 		if(key == tree->key) return tree;
 
-        if(key > tree->key ) tree = tree->right;
-        else tree = tree->left;
-    }
-    return NULL;
-}
+ 		if(key > tree->key ) tree = tree->right;
+ 		else tree = tree->left;
+ 	}
+ 	return NULL;
+ }
 /**
  * Affiche l'arbre à partir d'un certain noeud
  */
-void printTree(node *tree)
-{
-    
-    if(!tree) return;
+ void printTree(node *tree)
+ {
+ 	
+ 	if(!tree) return;
 //	printf("trace : l'arbre est non vide \n");
-    if(tree->left)  printTree(tree->left);
+ 	if(tree->left)  printTree(tree->left);
 
-    printf("Cle = %ju\n", tree->key);
-     printf("nombre de facteurs = %d\n", tree->nbFactor);
-    int j;
-    for(j=0; j<tree->nbFactor; j++)
-	{
-		printf("%lu ",tree->factors[j]);
-	}
-	printf("\n");
+ 	printf("Cle = %ju\n", tree->key);
+ 	printf("nombre de facteurs = %d\n", tree->nbFactor);
+ 	int j;
+ 	for(j=0; j<tree->nbFactor; j++)
+ 	{
+ 		printf("%lu ",tree->factors[j]);
+ 	}
+ 	printf("\n");
 
-    if(tree->right) printTree(tree->right);
-    printf(" \n");
-}
+ 	if(tree->right) printTree(tree->right);
+ 	printf(" \n");
+ }
 
-void printNode(node *tree)
-{
-    
-    if(!tree) return;
-    printf("%ju :", tree->key);
+ void printNode(node *tree)
+ {
+ 	
+ 	if(!tree) return;
+ 	printf("%ju :", tree->key);
     //printf("nombre de facteurs = %d\n", tree->nbFactor);
-    int j;
-    for(j=0; j<tree->nbFactor; j++)
-	{
-		printf("%lu ",tree->factors[j]);
-	}
-	printf("\n");
-}
+ 	int j;
+ 	for(j=0; j<tree->nbFactor; j++)
+ 	{
+ 		printf("%lu ",tree->factors[j]);
+ 	}
+ 	printf("\n");
+ }
 
 /**
  * supprime les descendant d'un noeuds
  */
-void clearTree(node **tree)
-{
-    node *tmpTree = *tree;
+ void clearTree(node **tree)
+ {
+ 	node *tmpTree = *tree;
 
-    if(!tree) return;
+ 	if(!tree) return;
 
-    if(tmpTree->left)  clearTree(&tmpTree->left);
+ 	if(tmpTree->left)  clearTree(&tmpTree->left);
 
-    if(tmpTree->right) clearTree(&tmpTree->right);
+ 	if(tmpTree->right) clearTree(&tmpTree->right);
 
-    free(tmpTree);	
+ 	free(tmpTree);	
 
-    *tree = NULL;
-}
+ 	*tree = NULL;
+ }
 
 
 
@@ -151,10 +153,6 @@ void clearTree(node **tree)
  *  -> supprimer un noeud : clearTree(node **tree)
  *  -> affichage récursif de l'arbre : printTree(node *tree)
  * /
-
-
-
-
 
 
 
@@ -179,47 +177,47 @@ int is_prime(uint64_t p)
 /**
  * affiche les facteurs premiers d'un nombre n
  */
-void print_prime_factors(uint64_t n, node **Arbre)
-{
-	uint64_t factors[MAX_FACTORS];
-	int j,k;
-	
-	
-	node* cur=searchNode(*Arbre, n);
+ void print_prime_factors(uint64_t n, node **Arbre)
+ {
+ 	uint64_t factors[MAX_FACTORS];
+ 	int j,k;
+ 	
+ 	
+ 	node* cur=searchNode(*Arbre, n);
 	// si le noeud n'existe pas, on le calcule le crée et on stocke le tableau des diviseurs de ce nombre n (key) sinon on l'affiche
-	if(cur!=NULL)
-	{	
-		printNode(cur);
-	}
-	else 
-	{
-		k=get_prime_factors(Arbre,n,factors);
-		addNode(Arbre, n, factors, k);
-		pthread_mutex_lock(&affichage);
-		printf("%ju: ",n);
-		for(j=0; j<k; j++)
-		{
-			printf("%lu ",factors[j]);
-		}
-		printf("\n");
-		pthread_mutex_unlock(&affichage);
-	}
-	
-}
+ 	if(cur!=NULL)
+ 	{	
+ 		printNode(cur);
+ 	}
+ 	else 
+ 	{
+ 		k=get_prime_factors(Arbre,n,factors);
+ 		addNode(Arbre, n, factors, k);
+ 		pthread_mutex_lock(&affichage);
+ 		printf("%ju: ",n);
+ 		for(j=0; j<k; j++)
+ 		{
+ 			printf("%lu ",factors[j]);
+ 		}
+ 		printf("\n");
+ 		pthread_mutex_unlock(&affichage);
+ 	}
+ 	
+ }
 
 /**
  * Renvoit un tableau contenant les facteurs premiers du nombre n
  * L'algorithme effectue des tests qui ne sont effectués que au premier tour ( divisible par 2, 3, 5)
  * puis les test lors des autres tours sont par itération du pas de 2, 4, 2, 4, 2
  */
-int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
-{
-	
-	uint64_t i;
-	uint64_t pas=4;
+ int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
+ {
+ 	
+ 	uint64_t i;
+ 	uint64_t pas=4;
 
 	int compteur=0; // le curseur sur le tableau
-	for(i=7;is_prime(n)==0;i+=(pas=6-pas))
+	for(i=7;i*i<= n;i+=(pas=6-pas))
 	{	
 		//les tests au premier tour
 		if(i==7)
@@ -279,79 +277,79 @@ int get_prime_factors(node **tree,uint64_t n,uint64_t* dest)
  * Permet de lancer une procedure qui créé des ptreads 
  * qui vont eux même lancer la décomposition en nombre entier. 
  */
-void *procedure_ptread(void *file)
-{
+ void *procedure_ptread(void *file)
+ {
 	//le premier noeud: la racine de l'arbre
-	node *Arbre = NULL;
+ 	node *Arbre = NULL;
 
-	uint64_t p;
-	FILE *fichier = (FILE*)file;
-	int finish = 0;
+ 	uint64_t p;
+ 	FILE *fichier = (FILE*)file;
+ 	int finish = 0;
 	//test de fin de lecture du fichier
-	while (finish==0) 
-	{
-		pthread_mutex_lock(&mtxCpt);
-		if(fscanf(fichier, "%lu",&p) != EOF)
-		{
-			pthread_mutex_unlock(&mtxCpt);
-			print_prime_factors(p, &Arbre);
-		}
-		else
-		{
-			pthread_mutex_unlock(&mtxCpt);
-			finish = 1;
-		}
-	}
-}
+ 	while (finish==0) 
+ 	{
+ 		pthread_mutex_lock(&mtxCpt);
+ 		if(fscanf(fichier, "%lu",&p) != EOF)
+ 		{
+ 			pthread_mutex_unlock(&mtxCpt);
+ 			print_prime_factors(p, &Arbre);
+ 		}
+ 		else
+ 		{
+ 			pthread_mutex_unlock(&mtxCpt);
+ 			finish = 1;
+ 		}
+ 	}
+ }
 
 /**
  * Le main lit dans un fichier chaque ligne et affiche les facteurs premiers
  * du nombre lu sur chaque ligne en utilisant le multi-threading
  */
-int main(int argc, char *argv[])
-{
+ int main(int argc, char *argv[])
+ {
 
 
 	// un nombre 64 bit pivot pour ranger la ligne lue du fichier
-	uint64_t p;
-	int result=0;
+ 	uint64_t p;
+ 	int result=0;
 	//création et ouverture en lecture du fichier
-	FILE *fichier;
-	fichier = fopen ("number.txt", "r");
+ 	FILE *fichier;
+ 	fichier = fopen ("number.txt", "r");
 
 	//création mutex
-	pthread_t tid1,tid2;
+ 	pthread_t tid1,tid2;
 	//initialisation mutex
-	pthread_mutex_init(&mtxCpt,NULL);
-	pthread_mutex_init(&affichage,NULL);
+ 	pthread_mutex_init(&mtxCpt,NULL);
+ 	pthread_mutex_init(&affichage,NULL);
 	//creation
-	if(pthread_create(&tid1, NULL, procedure_ptread, (void *) fichier)!=0)
-	{
-		printf("Erreur de création de thread\n");
-	}
-	if(pthread_create(&tid2, NULL, procedure_ptread, (void *) fichier)!=0)
-	{
-		printf("Erreur de création de thread\n");
-	}
+ 	if(pthread_create(&tid1, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
+ 	if(pthread_create(&tid2, NULL, procedure_ptread, (void *) fichier)!=0)
+ 	{
+ 		printf("Erreur de création de thread\n");
+ 	}
 
 	//attente
-	if(pthread_join(tid1,NULL)!=0)
-	{
-		printf("Erreur de joins de thread 1\n");
-	}
-	if(pthread_join(tid2,NULL)!=0)
-	{
-		printf("Erreur de joins de thread 2\n");
-	}
+ 	if(pthread_join(tid1,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 1\n");
+ 	}
+ 	if(pthread_join(tid2,NULL)!=0)
+ 	{
+ 		printf("Erreur de joins de thread 2\n");
+ 	}
 
-	fclose(fichier);
-	pthread_mutex_destroy(&affichage);
-	pthread_mutex_destroy(&mtxCpt);
-	pthread_exit(NULL);
-	
+ 	fclose(fichier);
+ 	pthread_mutex_destroy(&affichage);
+ 	pthread_mutex_destroy(&mtxCpt);
+ 	pthread_exit(NULL);
+ 	
 	//affichage de l'arbre binaire ___TEST
 
 	//printf(" \n --- affichage de l'arbre --- \n");
 	//printTree(Arbre); 
-	return 0;
-}
+ 	return 0;
+ }
