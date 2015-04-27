@@ -25,7 +25,7 @@ solution1: main6.c
 	gcc  -pthread -o solution1 main6.c 
 
 solution2: main7.c
-	gcc  -pthread -O3 solution2 main7.c 
+	gcc  -pthread -o solution2 main7.c 
 
 # add your own rules when you create new programs
 
